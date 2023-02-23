@@ -29,21 +29,30 @@
 
         class Truck extends Car {
             weight;
-            maxCargo;
-            model;
+            maxCargo; 
 
             constructor(model, maxCargo) {
-                this.model = model;
+                super(model);
                 this.maxCargo = maxCargo;
             }
 
             loadCargo(weight) {
                 if (weight > this.maxCargo) {
-                    console.log("Этот грузовик не может перевозить более 1000кг груза");
-                }
-                else {
+                    console.log(`Этот грузовик ${this.model} не может перевозить более ${this.maxCargo}кг груза`);
+                } else {
                     this.weight = weight;
-                    console.log(`В грузовик загружено ${this.weight}кг.`);
+                    console.log(`В грузовик ${this.model} загружено ${this.weight}кг.`);
+                }
+            }
+
+            move() {
+                if (this.weight < 500) {
+                    super.move();
+                } else if (this.weight < this.maxCargo) {
+                    console.log(`Грузовик ${this.model} движется со скоростью 50 км/час.`);
+                } else {
+                    console.log(
+                        `Грузовик ${this.model} не движется он не перевозит более ${this.maxCargo}кг груза`);
                 }
             }
         }
@@ -51,9 +60,17 @@
         let v1 = new Car("Mazda");
         v1.move();
 
-        let v2 = new Truck();
+        let v2 = new Truck("Pukap", 1000);
         v2.loadCargo(1500);
         v2.move();
+
+        let v3 = new Truck("Gaz", 3500);
+        v3.loadCargo(100);
+        v3.move();
+
+        let v4 = new Truck("Maz", 7000);
+        v4.loadCargo(4000);
+        v4.move();
     </script>
 </body>
 
